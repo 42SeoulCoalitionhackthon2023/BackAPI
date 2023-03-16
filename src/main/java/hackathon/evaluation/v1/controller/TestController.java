@@ -15,10 +15,10 @@ public class TestController {
     private final ObjectMapper objectMapper;
 
     @GetMapping()
-    String test() throws JsonProcessingException {
+    TestDto test() throws JsonProcessingException {
         TestDto greeting = new TestDto();
         greeting.setText("hello world");
 
-        return objectMapper.writeValueAsString(greeting);
+        return greeting;
     }
 }
