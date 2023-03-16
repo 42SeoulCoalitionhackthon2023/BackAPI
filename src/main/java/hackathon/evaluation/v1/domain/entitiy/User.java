@@ -11,6 +11,7 @@ import java.util.Date;
 
 @Entity
 @Data
+@Getter
 public class User {
 
     @Id

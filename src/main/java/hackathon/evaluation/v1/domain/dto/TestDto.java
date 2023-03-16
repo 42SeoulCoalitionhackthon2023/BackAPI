@@ -1,4 +1,4 @@
-package hackathon.evaluation.v1.Dto;
+package hackathon.evaluation.v1.domain.dto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -6,5 +6,5 @@ import lombok.Setter;
 @Getter
 @Setter
 public class TestDto {
-    String text;
+    private String text;
 }

@@ -1,7 +1,6 @@
 package hackathon.evaluation.v1.controller;
 
-import hackathon.evaluation.v1.Dto.UserDto;
-import hackathon.evaluation.v1.domain.entitiy.User;
+import hackathon.evaluation.v1.domain.dto.UserDto;
 import hackathon.evaluation.v1.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
