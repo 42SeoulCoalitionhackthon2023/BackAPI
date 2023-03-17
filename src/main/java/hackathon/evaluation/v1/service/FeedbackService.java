@@ -28,7 +28,17 @@ public class FeedbackService {
     }
 
     public List<FeedbackDto> getCommentOf(Integer corrected){
-        List<Feedback> feedback = feedbackRepository.findByCorrected(corrected);
+        List<Feedback> feedback = feedbackRepository.findByCorrectedOrderByCreatedAtDesc(corrected);
+        return getFeedbackDtoList(feedback);
+    }
+
+    public List<FeedbackDto> getCommentByCorrectorProjectName(Integer corrector, String projectName){
+        List<Feedback> feedback = feedbackRepository.findByCorrectorAndProjectNameOrderByCreatedAtDesc(corrector, projectName);
+        return getFeedbackDtoList(feedback);
+    }
+
+    public List<FeedbackDto> getCommentByCorrectedProjectName(Integer corrected, String projectName){
+        List<Feedback> feedback = feedbackRepository.findByCorrectedAndProjectNameOrderByCreatedAtDesc(corrected, projectName);
         return getFeedbackDtoList(feedback);
     }
 
