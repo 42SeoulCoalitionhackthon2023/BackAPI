@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Component
@@ -16,19 +17,24 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-//    public UserDto getUserDto(Integer id) {
-//        UserDto userDto = new UserDto(id);
-//        return userDto;
-//    }
-
-    public User getUserInfo(String intraId) {
+    @Transactional
+    public UserDto getUserInfo(String intraId) {
         User userData = userRepository.findByIntraId(intraId);
+        return getUserDto(userData);
+    }
+
+    private static UserDto getUserDto(User userData) throws NullPointerException{
         UserDto userInfo = new UserDto();
-        userInfo.setPid(userData.getPid());
-        userInfo.setUserId(userData.getUserId());
-        userInfo.setBlackhole(userData.getBlackhole());
-        userInfo.setLevel(userData.getLevel());
-        userInfo.setImage(userData.getImage());
-        return userData;
+        try {
+            userInfo.setPid(userData.getPid());
+            userInfo.setUserId(userData.getUserId());
+            userInfo.setIntraId(userData.getIntraId());
+            userInfo.setBlackhole(userData.getBlackhole());
+            userInfo.setLevel(userData.getLevel());
+            userInfo.setImage(userData.getImage());}
+        catch (NullPointerException e){
+            return null;
+        }
+        return userInfo;
     }
 }

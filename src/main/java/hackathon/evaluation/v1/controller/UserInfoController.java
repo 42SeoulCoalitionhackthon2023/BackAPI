@@ -15,8 +15,7 @@ public class UserInfoController {
     private final UserService userService;
 
     @GetMapping("/{intraId}")
-    public String userInformation(@PathVariable String intraId) {
-        System.out.println("hello " + userService.getUserInfo(intraId));
-        return "hello " + userService.getUserInfo(intraId);
+    public UserDto userInformation(@PathVariable String intraId) {
+        return userService.getUserInfo(intraId);
     }
 }

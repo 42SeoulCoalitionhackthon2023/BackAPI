@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.Getter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.util.Date;
