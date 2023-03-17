@@ -9,6 +9,5 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
-    User findByUserId(Integer userId);
     User findByIntraId(String intraId);
 }

@@ -15,4 +15,5 @@ public class UserDto {
     private String image;
     private Date blackhole;
     private Integer level;
+    private Integer outstandingRate;
 }

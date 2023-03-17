@@ -24,17 +24,17 @@ public class UserService {
     }
 
     private static UserDto getUserDto(User userData) throws NullPointerException{
-        UserDto userInfo = new UserDto();
+        UserDto userDto = new UserDto();
         try {
-            userInfo.setPid(userData.getPid());
-            userInfo.setUserId(userData.getUserId());
-            userInfo.setIntraId(userData.getIntraId());
-            userInfo.setBlackhole(userData.getBlackhole());
-            userInfo.setLevel(userData.getLevel());
-            userInfo.setImage(userData.getImage());}
+            userDto.setPid(userData.getPid());
+            userDto.setUserId(userData.getUserId());
+            userDto.setIntraId(userData.getIntraId());
+            userDto.setBlackhole(userData.getBlackhole());
+            userDto.setLevel(userData.getLevel());
+            userDto.setImage(userData.getImage());}
         catch (NullPointerException e){
             return null;
         }
-        return userInfo;
+        return userDto;
     }
 }

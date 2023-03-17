@@ -24,4 +24,6 @@ public class User {
     private String image;
     private Date blackhole;
     private Integer level;
+    @Column(name="outstanding_rate")
+    private Integer outstandingRate;
 }
