@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(originPatterns = "http://121.135.181.61:3000")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/test2")
+@RequestMapping("/test4")
 public class TestController4 {
 
     private final ObjectMapper objectMapper;
