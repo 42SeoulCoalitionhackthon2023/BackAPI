@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@CrossOrigin(originPatterns = "http://121.135.181.61:3000") //sungwook localhost:3000
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/test4")

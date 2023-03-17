@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@CrossOrigin(originPatterns = "https://evaluation.42seoul.link:8080") // vercell server :8080
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/test3")
