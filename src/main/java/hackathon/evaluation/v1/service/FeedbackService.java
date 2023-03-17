@@ -23,7 +23,7 @@ public class FeedbackService {
     FeedbackRepository feedbackRepository;
 
     public List<FeedbackDto> getCommentBy(Integer corrector){
-        List<Feedback> feedback = feedbackRepository.findByCorrector(corrector);
+        List<Feedback> feedback = feedbackRepository.findByCorrectorOrderByCreatedAtDesc(corrector);
         return getFeedbackDtoList(feedback);
     }
 

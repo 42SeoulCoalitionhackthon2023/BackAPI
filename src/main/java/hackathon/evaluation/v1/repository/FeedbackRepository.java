@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface FeedbackRepository extends JpaRepository<Feedback, Integer> {
-    List<Feedback> findByCorrector(Integer corrector);
+    List<Feedback> findByCorrectorOrderByCreatedAtDesc(Integer corrector);
     List<Feedback> findByCorrected(Integer corrected);
 }
