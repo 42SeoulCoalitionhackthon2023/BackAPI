@@ -50,6 +50,7 @@ public class FeedbackService {
         return getFeedbackDtoList(feedback);
     }
 
+    @Transactional
     public String getIntraId(Integer userId){
         UserDto example = userService.getUserInfoById(userId);
         return example.getIntraId();
