@@ -5,9 +5,11 @@ import hackathon.evaluation.v1.domain.entitiy.User;
 import hackathon.evaluation.v1.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.HttpStatusCodeException;
 
 @Service
 @Component
@@ -15,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserService {
 
     @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Transactional
     public UserDto getUserInfo(String intraId) {
@@ -24,9 +26,9 @@ public class UserService {
     }
 
     @Transactional
-    public String userIdToIntraId(Integer userId) {
-        String intraId = userRepository.findByUserId(userId).getIntraId();
-        return intraId;
+    public UserDto getUserInfoById(Integer userId) {
+        User userData = userRepository.findByUserId(userId);
+        return getUserDto(userData);
     }
 
     private static UserDto getUserDto(User userData) throws NullPointerException{

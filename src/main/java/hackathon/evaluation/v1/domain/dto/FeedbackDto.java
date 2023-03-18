@@ -17,8 +17,8 @@ public class FeedbackDto {
     private String feedback;
     private Integer finalMark;
     private Boolean flagOutstanding;
-    private Integer corrector;
-    private Integer corrected;
+    private String corrector;
+    private String corrected;
     private Date createdAt;
     private Integer projectId;
     private String projectName;

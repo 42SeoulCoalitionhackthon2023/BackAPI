@@ -23,6 +23,8 @@ public class FeedbackService {
 
     @Autowired
     private final FeedbackRepository feedbackRepository;
+    @Autowired
+    private UserService userService;
 
     @Transactional
     public List<FeedbackDto> getCommentBy(Integer corrector){
@@ -48,6 +50,12 @@ public class FeedbackService {
         return getFeedbackDtoList(feedback);
     }
 
+    public String getIntraId(Integer userId){
+        UserDto example = userService.getUserInfoById(userId);
+        System.out.println(example.getIntraId());
+        return example.getIntraId();
+    }
+
     public List<FeedbackDto> getFeedbackDtoList(List<Feedback> feedbackList) throws NullPointerException{
         List<FeedbackDto> feedbackDtoList = new ArrayList<>();
         for (Feedback feedback : feedbackList) {
@@ -59,8 +67,8 @@ public class FeedbackService {
                 feedbackDto.setFeedback(feedback.getFeedback());
                 feedbackDto.setFinalMark(feedback.getFinalMark());
                 feedbackDto.setFlagOutstanding(feedback.getFlagOutstanding());
-                feedbackDto.setCorrector(feedback.getCorrector());
-                feedbackDto.setCorrected(feedback.getCorrected());
+                feedbackDto.setCorrector(getIntraId(feedback.getCorrector()));
+                feedbackDto.setCorrected(getIntraId(feedback.getCorrected()));
                 feedbackDto.setCreatedAt(feedback.getCreatedAt());
                 feedbackDto.setProjectId(feedback.getProjectId());
                 feedbackDto.setProjectName(feedback.getProjectName());

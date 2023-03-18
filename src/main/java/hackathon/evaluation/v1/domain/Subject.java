@@ -3,12 +3,13 @@ package hackathon.evaluation.v1.domain;
 import lombok.Data;
 
 import java.util.HashMap;
+import java.util.List;
 
 @Data
 public class Subject {
 
     HashMap<Integer, String> subjectList = new HashMap<>();
-
+//    subjectList.
 //    "libft"
 
 //    "ft_printf"
