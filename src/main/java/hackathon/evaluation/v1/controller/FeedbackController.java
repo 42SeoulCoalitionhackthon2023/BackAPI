@@ -50,7 +50,7 @@ public class FeedbackController {
         } else if (type.equals("corrected")) {
             return feedbackService.getCommentOf(userId);
         }
-        return null;
+        return null;  //예외처리 필요
     }
 
     /*
@@ -71,6 +71,6 @@ public class FeedbackController {
         } else if (type.equals("corrected")) {
             return feedbackService.getCommentByCorrectedProjectName(userId, projectName);
         }
-        return null;
+        return null;  //예외처리 필요
     }
 }

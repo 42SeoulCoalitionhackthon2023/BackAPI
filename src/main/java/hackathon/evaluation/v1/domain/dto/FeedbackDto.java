@@ -1,7 +1,9 @@
 package hackathon.evaluation.v1.domain.dto;
 
+import hackathon.evaluation.v1.repository.UserRepository;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
 
@@ -20,4 +22,12 @@ public class FeedbackDto {
     private Date createdAt;
     private Integer projectId;
     private String projectName;
+
+//    public void setCorrector(Integer corrector) {
+//        this.corrector = userRepository.findByUserId(corrector).getIntraId();
+//    }
+//
+//    public void setCorrected(Integer corrected) {
+//        this.corrected = userRepository.findByUserId(corrected).getIntraId();
+//    }
 }

@@ -1,6 +1,8 @@
 package hackathon.evaluation.v1.domain.entitiy;
 
+import hackathon.evaluation.v1.repository.UserRepository;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -8,7 +10,6 @@ import java.util.Date;
 @Entity
 @Data
 public class Feedback {
-
     @Id
     private Integer pid;
 
@@ -31,4 +32,5 @@ public class Feedback {
     private Integer projectId;
     @Column(name="project_name")
     private String projectName;
+
 }

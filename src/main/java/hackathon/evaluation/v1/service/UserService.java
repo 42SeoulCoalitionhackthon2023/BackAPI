@@ -23,6 +23,12 @@ public class UserService {
         return getUserDto(userData);
     }
 
+    @Transactional
+    public String userIdToIntraId(Integer userId) {
+        String intraId = userRepository.findByUserId(userId).getIntraId();
+        return intraId;
+    }
+
     private static UserDto getUserDto(User userData) throws NullPointerException{
         UserDto userDto = new UserDto();
         try {

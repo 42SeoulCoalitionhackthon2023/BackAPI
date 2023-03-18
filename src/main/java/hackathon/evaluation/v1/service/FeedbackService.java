@@ -5,10 +5,12 @@ import hackathon.evaluation.v1.domain.dto.UserDto;
 import hackathon.evaluation.v1.domain.entitiy.Feedback;
 import hackathon.evaluation.v1.domain.entitiy.User;
 import hackathon.evaluation.v1.repository.FeedbackRepository;
+import hackathon.evaluation.v1.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -20,30 +22,33 @@ import java.util.List;
 public class FeedbackService {
 
     @Autowired
-    FeedbackRepository feedbackRepository;
+    private final FeedbackRepository feedbackRepository;
 
+    @Transactional
     public List<FeedbackDto> getCommentBy(Integer corrector){
         List<Feedback> feedback = feedbackRepository.findByCorrectorOrderByCreatedAtDesc(corrector);
         return getFeedbackDtoList(feedback);
     }
 
+    @Transactional
     public List<FeedbackDto> getCommentOf(Integer corrected){
         List<Feedback> feedback = feedbackRepository.findByCorrectedOrderByCreatedAtDesc(corrected);
         return getFeedbackDtoList(feedback);
     }
 
+    @Transactional
     public List<FeedbackDto> getCommentByCorrectorProjectName(Integer corrector, String projectName){
         List<Feedback> feedback = feedbackRepository.findByCorrectorAndProjectNameOrderByCreatedAtDesc(corrector, projectName);
         return getFeedbackDtoList(feedback);
     }
 
+    @Transactional
     public List<FeedbackDto> getCommentByCorrectedProjectName(Integer corrected, String projectName){
         List<Feedback> feedback = feedbackRepository.findByCorrectedAndProjectNameOrderByCreatedAtDesc(corrected, projectName);
         return getFeedbackDtoList(feedback);
     }
 
-    private static List<FeedbackDto> getFeedbackDtoList(List<Feedback> feedbackList) throws NullPointerException{
-        System.out.println("hello " + feedbackList);
+    public List<FeedbackDto> getFeedbackDtoList(List<Feedback> feedbackList) throws NullPointerException{
         List<FeedbackDto> feedbackDtoList = new ArrayList<>();
         for (Feedback feedback : feedbackList) {
             try {
@@ -59,7 +64,6 @@ public class FeedbackService {
                 feedbackDto.setCreatedAt(feedback.getCreatedAt());
                 feedbackDto.setProjectId(feedback.getProjectId());
                 feedbackDto.setProjectName(feedback.getProjectName());
-
                 feedbackDtoList.add(feedbackDto);
             }
             catch (NullPointerException e){
@@ -68,6 +72,5 @@ public class FeedbackService {
         }
         return feedbackDtoList;
     }
-
 
 }
