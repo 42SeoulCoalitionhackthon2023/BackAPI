@@ -52,7 +52,6 @@ public class FeedbackService {
 
     public String getIntraId(Integer userId){
         UserDto example = userService.getUserInfoById(userId);
-        System.out.println(example.getIntraId());
         return example.getIntraId();
     }
 
