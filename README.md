@@ -99,7 +99,7 @@
     
     ```python
     /*
-        Form : (/comment/{type}={userId}/{circle})
+        Form : (/comment/{type}={userId}/circle={circle})
         - {type} - String : "corrector", "corrected"
         - {userId} - Integer : userId (주의!! intraId 아님)
         - {circle} - Integer : 서클
