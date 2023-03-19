@@ -1,6 +1,8 @@
 package hackathon.evaluation.v1.controller;
 
+import hackathon.evaluation.v1.domain.dto.FeedbackDto;
 import hackathon.evaluation.v1.domain.dto.UserDto;
+import hackathon.evaluation.v1.service.FeedbackService;
 import hackathon.evaluation.v1.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,8 @@ public class UserInfoController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    FeedbackService feedbackService;
 
     @GetMapping("/{intraId}")
     public ResponseEntity<UserDto> userInformation(@PathVariable String intraId) {
@@ -24,6 +28,7 @@ public class UserInfoController {
         if (userDto == null) {
             return ResponseEntity.badRequest().build();
         }
+        userDto.setCircle(feedbackService.getUserCircle(userDto.getUserId()));
         return ResponseEntity.ok(userDto);
     }
 

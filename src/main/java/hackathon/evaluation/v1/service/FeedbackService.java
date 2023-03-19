@@ -2,21 +2,17 @@ package hackathon.evaluation.v1.service;
 
 import hackathon.evaluation.v1.domain.Subject;
 import hackathon.evaluation.v1.domain.dto.FeedbackDto;
+import hackathon.evaluation.v1.domain.dto.CircleDto;
 import hackathon.evaluation.v1.domain.dto.UserDto;
 import hackathon.evaluation.v1.domain.entitiy.Feedback;
-import hackathon.evaluation.v1.domain.entitiy.User;
 import hackathon.evaluation.v1.repository.FeedbackRepository;
-import hackathon.evaluation.v1.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 @Component
@@ -73,7 +69,17 @@ public class FeedbackService {
         return getFeedbackDtoList(feedback);
     }
 
-    @Transactional
+    public Integer getUserCircle(Integer userId) {
+        Feedback feedback = feedbackRepository.findFirstByCorrectedOrderByCreatedAtDesc(userId);
+        Integer circle = 0;
+        circle = subject.subjectList.entrySet().stream()
+                .filter(entry -> entry.getValue().contains(feedback.getProjectName()))
+                .map(Map.Entry::getKey)
+                .findFirst()
+                .orElse(null);
+        return circle;
+    }
+
     public String getIntraId(Integer userId){
         try {
             UserDto userInfo = userService.getUserInfoById(userId);
@@ -108,5 +114,18 @@ public class FeedbackService {
         }
         return feedbackDtoList;
     }
+
+
+    public CircleDto getCircleDto(Feedback feedback) throws NullPointerException{
+            CircleDto circleDto = new CircleDto();
+            try {
+                circleDto.setCircle(getUserCircle(feedback.getCorrected()));
+            }
+            catch (NullPointerException e){
+                circleDto.setCircle(0);
+            }
+            return circleDto;
+        }
+
 
 }

@@ -16,4 +16,5 @@ public class UserDto {
     private Date blackhole;
     private Integer level;
     private Integer outstandingRate;
+    private Integer circle;
 }

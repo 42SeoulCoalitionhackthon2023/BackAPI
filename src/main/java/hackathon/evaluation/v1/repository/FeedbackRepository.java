@@ -12,4 +12,5 @@ public interface FeedbackRepository extends JpaRepository<Feedback, Integer> {
     List<Feedback> findByCorrectedOrderByCreatedAtDesc(Integer corrected);
     List<Feedback> findByCorrectorAndProjectNameOrderByCreatedAtDesc(Integer corrector, String projectName);
     List<Feedback> findByCorrectedAndProjectNameOrderByCreatedAtDesc(Integer corrected, String projectName);
+    Feedback findFirstByCorrectedOrderByCreatedAtDesc(Integer corrected);
 }
