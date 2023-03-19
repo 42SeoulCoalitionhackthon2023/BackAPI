@@ -70,14 +70,20 @@ public class FeedbackService {
     }
 
     public Integer getUserCircle(Integer userId) {
-        Feedback feedback = feedbackRepository.findFirstByCorrectedOrderByCreatedAtDesc(userId);
-        Integer circle = 0;
-        circle = subject.subjectList.entrySet().stream()
-                .filter(entry -> entry.getValue().contains(feedback.getProjectName()))
-                .map(Map.Entry::getKey)
-                .findFirst()
-                .orElse(null);
-        return circle;
+        try {
+            Feedback feedback = feedbackRepository.findFirstByCorrectedOrderByCreatedAtDesc(userId);
+            Integer circle = 0;
+            circle = subject.subjectList.entrySet().stream()
+                    .filter(entry -> entry.getValue().contains(feedback.getProjectName()))
+                    .map(Map.Entry::getKey)
+                    .findFirst()
+                    .orElse(circle = -1);                       //멤버일 경우 -1 로 서클 리턴
+            return circle;
+        }
+        catch (NullPointerException e){
+            Integer circle = 0;
+            return circle;
+        }
     }
 
     public String getIntraId(Integer userId){
