@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("user/comment")
+@RequestMapping("comment")
 public class FeedbackController {
 
     @Autowired

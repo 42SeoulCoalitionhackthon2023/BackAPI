@@ -52,8 +52,13 @@ public class FeedbackService {
 
     @Transactional
     public String getIntraId(Integer userId){
-        UserDto userInfo = userService.getUserInfoById(userId);
-        return userInfo.getIntraId();
+        try {
+            UserDto userInfo = userService.getUserInfoById(userId);
+            return userInfo.getIntraId();
+        }
+        catch (NullPointerException e){
+            return "Pisciner";
+        }
     }
 
     public List<FeedbackDto> getFeedbackDtoList(List<Feedback> feedbackList) throws NullPointerException{
