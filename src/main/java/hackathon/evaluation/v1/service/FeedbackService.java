@@ -29,12 +29,6 @@ public class FeedbackService {
     @Transactional
     public List<FeedbackDto> getCommentBy(Integer corrector){
         List<Feedback> feedback = feedbackRepository.findByCorrectorOrderByCreatedAtDesc(corrector);
-
-
-        System.out.println(feedback);
-
-
-
         return getFeedbackDtoList(feedback);
     }
 
@@ -59,19 +53,13 @@ public class FeedbackService {
     @Transactional
     public String getIntraId(Integer userId){
         UserDto userInfo = userService.getUserInfoById(userId);
-
-
-        System.out.println("here2" + userInfo.getIntraId());
-
-
-
         return userInfo.getIntraId();
     }
 
     public List<FeedbackDto> getFeedbackDtoList(List<Feedback> feedbackList) throws NullPointerException{
         List<FeedbackDto> feedbackDtoList = new ArrayList<>();
         for (Feedback feedback : feedbackList) {
-            try {
+//            try {
                 FeedbackDto feedbackDto = new FeedbackDto();
                 feedbackDto.setPid(feedback.getPid());
                 feedbackDto.setCorrectionId(feedback.getCorrectionId());
@@ -85,10 +73,10 @@ public class FeedbackService {
                 feedbackDto.setProjectId(feedback.getProjectId());
                 feedbackDto.setProjectName(feedback.getProjectName());
                 feedbackDtoList.add(feedbackDto);
-            }
-            catch (NullPointerException e){
-                return null;
-            }
+//            }
+//            catch (NullPointerException e){
+//                return null;
+//            }
         }
         return feedbackDtoList;
     }
