@@ -1,5 +1,6 @@
 package hackathon.evaluation.v1.service;
 
+import hackathon.evaluation.v1.domain.Subject;
 import hackathon.evaluation.v1.domain.dto.FeedbackDto;
 import hackathon.evaluation.v1.domain.dto.UserDto;
 import hackathon.evaluation.v1.domain.entitiy.Feedback;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -25,6 +27,7 @@ public class FeedbackService {
     private final FeedbackRepository feedbackRepository;
     @Autowired
     private UserService userService;
+    private final Subject subject = new Subject();
 
     @Transactional
     public List<FeedbackDto> getCommentBy(Integer corrector){
@@ -35,6 +38,26 @@ public class FeedbackService {
     @Transactional
     public List<FeedbackDto> getCommentOf(Integer corrected){
         List<Feedback> feedback = feedbackRepository.findByCorrectedOrderByCreatedAtDesc(corrected);
+        return getFeedbackDtoList(feedback);
+    }
+
+    @Transactional
+    public List<FeedbackDto> getCommentByCircle(Integer corrector, Integer circle){
+        List<Feedback> feedback = new ArrayList<>();
+        Arrays.stream(subject.subjectList.get(circle).split("/"))
+                .iterator()
+                .forEachRemaining((each_subject) -> feedback.addAll(feedbackRepository
+                        .findByCorrectorAndProjectNameOrderByCreatedAtDesc(corrector, each_subject)));
+        return getFeedbackDtoList(feedback);
+    }
+
+    @Transactional
+    public List<FeedbackDto> getCommentOfCircle(Integer corrected, Integer circle){
+        List<Feedback> feedback = new ArrayList<>();
+        Arrays.stream(subject.subjectList.get(circle).split("/"))
+                .iterator()
+                .forEachRemaining((each_subject) -> feedback.addAll(feedbackRepository
+                        .findByCorrectedAndProjectNameOrderByCreatedAtDesc(corrected, each_subject)));
         return getFeedbackDtoList(feedback);
     }
 
@@ -57,7 +80,7 @@ public class FeedbackService {
             return userInfo.getIntraId();
         }
         catch (NullPointerException e){
-            return "Pisciner";
+            return "Anonymous";
         }
     }
 

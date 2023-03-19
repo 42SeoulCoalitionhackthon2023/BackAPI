@@ -32,6 +32,21 @@ public class FeedbackController {
         return null;  //예외처리 필요
     }
 
+    @GetMapping("/{type}={userId}/circle={circle}")
+    public List<FeedbackDto> commentByCircle(
+            @PathVariable String type,
+            @PathVariable Integer userId,
+            @PathVariable Integer circle)
+    {
+        if (type.equals("corrector")) {
+            return feedbackService.getCommentByCircle(userId, circle);
+        } else if (type.equals("corrected")) {
+            return feedbackService.getCommentOfCircle(userId, circle);
+        }
+        return null;  //예외처리 필요
+    }
+
+
     @GetMapping("/{type}={userId}/{projectName}")
     public List<FeedbackDto> commentByProjectName(
             @PathVariable String type,
