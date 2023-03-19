@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/comment")
+@RequestMapping("user/comment")
 public class FeedbackController {
 
     @Autowired
@@ -24,10 +24,10 @@ public class FeedbackController {
             @PathVariable String type,
             @PathVariable Integer userId)
     {
-        if (type.equals("corrected")) {
-            return feedbackService.getCommentOf(userId);
-        } else if (type.equals("corrector")) {
+        if (type.equals("corrector")) {
             return feedbackService.getCommentBy(userId);
+        } else if (type.equals("corrected")) {
+            return feedbackService.getCommentOf(userId);
         }
         return null;  //예외처리 필요
     }
