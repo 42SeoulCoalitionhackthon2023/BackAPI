@@ -59,7 +59,7 @@ public class FeedbackService {
     public List<FeedbackDto> getFeedbackDtoList(List<Feedback> feedbackList) throws NullPointerException{
         List<FeedbackDto> feedbackDtoList = new ArrayList<>();
         for (Feedback feedback : feedbackList) {
-//            try {
+            try {
                 FeedbackDto feedbackDto = new FeedbackDto();
                 feedbackDto.setPid(feedback.getPid());
                 feedbackDto.setCorrectionId(feedback.getCorrectionId());
@@ -73,10 +73,10 @@ public class FeedbackService {
                 feedbackDto.setProjectId(feedback.getProjectId());
                 feedbackDto.setProjectName(feedback.getProjectName());
                 feedbackDtoList.add(feedbackDto);
-//            }
-//            catch (NullPointerException e){
-//                return null;
-//            }
+            }
+            catch (NullPointerException e){
+                continue;
+            }
         }
         return feedbackDtoList;
     }
