@@ -96,7 +96,7 @@
      */
     ```
     
-- Feedback 정보 circle로 받아오기 (작업중)
+- Feedback 정보 circle로 받아오기
     
     `(https://api.evaluation.42seoul.link/comment/{type}={intraId}/circle={circle)`
     
